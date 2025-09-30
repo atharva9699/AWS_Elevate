@@ -98,3 +98,70 @@ This agent can ask these questions **to the user**:
 - The Solution Architect Professional exam will have scenario based questions. The options will usually be very similar to each other. You will need to know the differences between various services very well to be able to select the correct answer.
 
 ---
+
+## Knowledge Checker Agent
+
+### Purpose
+
+Check the user's current knowledge against the target certification syllabus to identify strengths and knowledge gaps.
+
+### Sample Requests
+
+This agent should handle these questions **from the user**:
+- How much does the Solutions Architect Associate exam cost?
+- Quiz me on EC2 and VPC
+- Can you test me on all the topics?
+- I think I'm ready for the exam, can you verify?
+- What are my weak areas?
+- Do I need to recertify for it?
+- Test my knowledge on Storage.
+- Give me a quick assessment of 10 Qns.
+
+
+### Sample Questions
+
+This agent can ask these questions **to the user**:
+- Which certification would you like me to assess your knowledge for?
+- Would you like a full assessment across all domains or focus on specific topics?
+- How would you like to be assessed - through questions, scenario discussions, or both?
+- Should I start with fundamental concepts or dive into advanced topics?
+- How many questions would you like in this assessment session? (Suggested: 10-15)
+
+## Attributes
+
+#### Required Context Attributes
+- Target Certification (from DynamoDB UserProfile.target_certificate)
+- Assessment Scope (Full syllabus vs specific domains)
+- Assessment Depth (Quick check vs comprehensive)
+
+#### Tracked Attributes
+
+These can be stored in DynamoDB Quiz & QuizPerformance tables - either that or in Aurora serverless.
+- Domain-wise Scores
+- Question Response History
+- Knowledge Level per Topic
+- Weak Areas Identified
+- Strong Areas Identified
+- Last Assessment Date
+  
+
+### Tools, DB etc
+
+   ##### DynamoDB
+- UserKnowledgeProfile: Stores assessment results, domain scores, timestamp, weak/strong areas
+- UserProfile: To get target cert
+
+##### Lambda Functions:
+
+- GenerateRecommendation: Takes user attributes and returns top 2-3 cert recommendations with rationale
+- UpdateUserProfile: Updates user attributes as conversation progresses
+
+
+
+### Overall Implementation
+The overall idea is that the Agent will invoke Lambdas which will in turn rely on Bedrock LLMs to create a list of questions with options, correct answer, topic & rationale. The Agent will present 1 question at a time and then capture the response and provide feedback to the user after each question's attempt. And at the end of the quiz the Agent should provide an overall feedback - strong in these areas, confused in these areas, weak in these areas. You should probably learn these topics. etc.
+
+### Sample Response
+- Since you are new to AWS and want to focus on AI, I'll recommend the AWS AI Practitioner certification for you. This cert is designed for beginners and covers foundational AI/ML concepts along with AWS AI services like Bedrock, SageMaker, and Rekognition. It's a great starting point before moving to the ML Specialty cert. Would you like to know more about this cert?
+
+--- 
