@@ -159,7 +159,7 @@ These can be stored in DynamoDB Quiz & QuizPerformance tables - either that or i
 
 
 ### Overall Implementation
-The overall idea is that the Agent will invoke Lambdas which will in turn rely on Bedrock LLMs to create a list of questions with options, correct answer, topic & rationale. The Agent will present 1 question at a time and then capture the response and provide feedback to the user after each question's attempt. And at the end of the quiz the Agent should provide an overall feedback - strong in these areas, confused in these areas, weak in these areas. You should probably learn these topics. etc.
+- The overall idea is that the Agent will invoke Lambdas which will in turn rely on Bedrock LLMs to create a list of questions with options, correct answer, topic & rationale. The Agent will present 1 question at a time and then capture the response and provide feedback to the user after each question's attempt. And at the end of the quiz the Agent should provide an overall feedback - strong in these areas, confused in these areas, weak in these areas. You should probably learn these topics. etc.
 
 ### Sample Response
 - Since you are new to AWS and want to focus on AI, I'll recommend the AWS AI Practitioner certification for you. This cert is designed for beginners and covers foundational AI/ML concepts along with AWS AI services like Bedrock, SageMaker, and Rekognition. It's a great starting point before moving to the ML Specialty cert. Would you like to know more about this cert?
