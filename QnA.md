@@ -27,15 +27,6 @@ This agent is designed as the factual backbone of the system, providing quick, a
 <img width="420" height="553" alt="Screenshot 2025-10-14 at 10 12 58 PM" src="https://github.com/user-attachments/assets/a1409ebb-ccfc-40f4-a644-057da84a5b4e" />
 
 ------------- 
-flowchart LR
-    User([User])
-    subgraph QnA System
-        Planner[Planner Agent<br>Amazon Bedrock powered by Nova Pro model]
-        QnA[QnA Agent<br>Amazon Bedrock powered by Nova Pro model]
-    end
-    User -->|User sends request to Planner| Planner
-    Planner -->|Planner analyzes the request and routes to QnA agent| QnA
-    QnA -->|QnA agent sends the structured response to the user| User
 
 
 
