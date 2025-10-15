@@ -53,22 +53,31 @@ Key: CertificationName = recommended_cert
 
 - If found → retrieves full certification record (e.g. topics, duration, difficulty, exam format)
 
------------
-
 5️) Return Response in Bedrock Agent Format
 
 On success:
+
 {
   "messageVersion": "1.0",
+  
   "response": {
+  
     "actionGroup": ...,
+    
     "apiPath": ...,
+    
     "httpMethod": "GET",
+    
     "httpStatusCode": 200,
+    
     "responseBody": {
+    
       "application/json": {
+
         "body": {
+        
           // full CertInfo record (dict)
+          
         }
       }
     }
