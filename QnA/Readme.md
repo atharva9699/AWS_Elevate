@@ -8,13 +8,6 @@ It ensures accurate, context-aware, and friendly responses using the Nova Pro mo
 This agent acts as the knowledge expert, providing detailed insights about certification exams such as duration, cost, difficulty, topics covered, and recertification details.
 
 ------------- 
-<img width="1440" height="900" alt="Screenshot 2025-10-14 at 9 30 20 PM" src="https://github.com/user-attachments/assets/a78fdd7c-7310-428c-ad3d-0b54bc512b78" />
-
-------------- 
-## Purpose of this agent :
-This agent is designed as the factual backbone of the system, providing quick, accurate, and administrative information regarding AWS Certification exams. Efficient retrieval and articulation of facts (cost, duration, format, policies) about specific AWS certifications.
-
-------------- 
 
 ## Example :
 
