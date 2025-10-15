@@ -90,3 +90,6 @@ While not directly shown in the Lambda code, an **API Gateway** could be used to
   - **Error handling and retries**: The provided Lambda code includes comprehensive error handling using `try-except` blocks, specifically for `ClientError` from boto3. This ensures that a proper error message and status code are returned in case of issues like a non-existent user or DynamoDB errors. The agent itself can be configured to handle these error codes and provide a graceful response to the user.
   - **Backup**: DynamoDB **Point-in-Time Recovery (PITR)** can be enabled on the `user_profile` table to protect the data from accidental deletion or corruption.
   - **Scaling and performance considerations**: The serverless nature of **Lambda** and **DynamoDB** ensures the system scales automatically to handle varying loads. This eliminates the need for manual capacity provisioning and ensures a consistent, low-latency experience for users.
+
+
+<img width="542" height="767" alt="image" src="https://github.com/user-attachments/assets/a69b0671-1f0f-4fba-ac40-a3585eef1257" />
