@@ -1,7 +1,4 @@
-Here is the information for the **Recommendation Agent** in a Markdown file format.
-
 -----
-
 # Recommendation Agent
 
 ### Purpose of this Agent:
