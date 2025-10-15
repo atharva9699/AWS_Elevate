@@ -77,4 +77,35 @@ On success:
 
 The actionGroup, apiPath, and httpMethod values are taken dynamically from the incoming event.
 
-  --------
+--------
+**Error Handling**
+
+The function handles different failure scenarios with proper HTTP status codes:
+
+Scenario	Status	Message
+Missing username	>> 400	>>"username is required"
+User not found	404	"User with username 'X' not found"
+No recommended_cert	404	"No recommended certification found for user 'X'"
+Cert not found	404	"Certification 'Y' not found in CertInfo"
+DynamoDB ClientError	500	"DynamoDB error: ..."
+Any other exception	500	"Unhandled exception: ..."
+
+All errors are also logged to CloudWatch.
+
+--------
+
+**Typical Flow Example**
+
+User asks: "What are the details of my recommended certification?"
+
+- QnA agent invokes load_cert_info with { "username": "john_doe" }
+
+- Lambda looks up user_profile → recommended_cert = 'AWS Cloud Practitioner'
+
+- Lambda retrieves full cert detail from CertInfo
+
+- Lambda returns full information to agent in Bedrock format
+
+- Agent displays response to user
+
+--------------
