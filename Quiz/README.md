@@ -4,7 +4,7 @@
 
 ### 1\. Purpose of this Agent:
 
-The **Knowledge Checker Agent** (named "Quiz") is an expert system designed to **create and administer mock AWS certification questions** to assess a user's preparation level. Its core purpose is to facilitate an interactive quiz workflow, track user performance on a question-by-question basis, and provide an overall result upon completion, thereby identifying the user's current knowledge against the target certification syllabus. 📝
+The **Knowledge Checker Agent** (named "Quiz") is an expert system designed to **create and administer mock AWS certification questions** to assess a user's preparation level. Its core purpose is to facilitate an interactive quiz workflow, track user performance on a question-by-question basis, and provide an overall result upon completion, thereby identifying the user's current knowledge against the target certification syllabus.
 
 -----
 
