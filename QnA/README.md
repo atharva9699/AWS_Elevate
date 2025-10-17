@@ -9,7 +9,7 @@ This agent acts as the knowledge expert, providing detailed insights about certi
 
 ------------- 
 ### QnA Agent workflow
-<img width="1131" height="369" alt="Screenshot 2025-10-17 at 14 45 59" src="https://github.com/user-attachments/assets/8bbe1719-2728-4887-b865-b74590017f70" />
+<img width="1131" height="369" alt="Screenshot 2025-10-17 at 15 02 18" src="https://github.com/user-attachments/assets/49a8ddce-2d72-4fbf-b368-4c8c8ca22a12" />
 
 
 ## Example :
