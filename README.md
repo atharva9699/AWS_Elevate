@@ -27,13 +27,3 @@ AWS certifications unlock new career opportunities, but many professionals face 
 
 ---
 
-## 🖼️ **Visual Concept**
-
-### 🎯 **User Journey**
-```mermaid
-flowchart TD
-    A[🚀 Start AWS_Elevate] --> B[🎯 Select Career Goal]
-    B --> C[🤖 AI Recommends Best AWS Certification]
-    C --> D[⚡ Adaptive Learning Plan]
-    D --> E[📊 Track Progress in Dashboard]
-    E --> F[🏆 Certification Success 🎉]
