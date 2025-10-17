@@ -8,6 +8,9 @@ It ensures accurate, context-aware, and friendly responses using the Nova Pro mo
 This agent acts as the knowledge expert, providing detailed insights about certification exams such as duration, cost, difficulty, topics covered, and recertification details.
 
 ------------- 
+### QnA Agent workflow
+<img width="1131" height="369" alt="Screenshot 2025-10-17 at 14 45 59" src="https://github.com/user-attachments/assets/8bbe1719-2728-4887-b865-b74590017f70" />
+
 
 ## Example :
 
