@@ -2,8 +2,7 @@
 
 ### Purpose
 
-This AWS Lambda function updates the recommended_cert field for a specific user in the `user_profile` DynamoDB table.
-It is designed to be used by AWS Bedrock Agents or API integrations to store the recommended AWS certification for a user.
+This AWS Lambda function updates the recommended_cert field for a specific user in the `user_profile` DynamoDB table. This is done so that the other collaborator agents are also aware about the specific cert recommended to the user. It is designed to be used by AWS Bedrock Agents or API integrations to store the recommended AWS certification for a user.
 
 ### Key Responsibilities
 
