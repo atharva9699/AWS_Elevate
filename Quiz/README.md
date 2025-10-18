@@ -1,10 +1,8 @@
------
-
-# Knowledge Checker Agent (Quiz)
+## Quiz Agent (Quiz)
 
 ### 1\. Purpose of this Agent:
 
-The **Knowledge Checker Agent** (named "Quiz") is an expert system designed to **create and administer mock AWS certification questions** to assess a user's preparation level. Its core purpose is to facilitate an interactive quiz workflow, track user performance on a question-by-question basis, and provide an overall result upon completion, thereby identifying the user's current knowledge against the target certification syllabus.
+The **Quiz Agent** (named "Quiz") is an expert system designed to **create and administer mock AWS certification questions** to assess a user's preparation level. Its core purpose is to facilitate an interactive quiz workflow, track user performance on a question-by-question basis, and provide an overall result upon completion, thereby identifying the user's current knowledge against the target certification syllabus.
 
 -----
 
@@ -14,24 +12,24 @@ The **Knowledge Checker Agent** (named "Quiz") is an expert system designed to *
 
 ```mermaid
 graph TD
-    subgraph Quiz Workflow
-        A[User Request: Test me on S3] --> B(Quiz Bedrock Agent - Nova Pro 1.0);
-        B -- IF No Username --> C{Ask for Username};
-        C --> B;
-        B -- Invoke: CreateQuiz (topic, num_questions, username) --> D(Lambda: create_quiz);
-        D -- Read recommended_cert --> F[DynamoDB: user_profile];
-        D -- Invoke Bedrock: Nova Pro 1.0 (generate questions) --> G(Amazon Bedrock);
-        G --> D -- Store Quiz & Questions --> H[DynamoDB: quiz & question tables];
-        D -- Return: quiz_id, 1st Question --> B;
-        B -- Present Question 1 --> I(User Answer: A, B, C, D);
-        I --> J(Agent tracks answer);
-        J -- Invoke: ShowNextQuestion (quiz_id, order, user_answer) --> K(Lambda: show_next_question);
-        K -- Check Answer & Update Scores --> H;
-        K -- Get Next Question --> H;
-        K -- Return: Next Question OR quiz_complete=True --> B;
-        B -- Loop until Quiz Complete --> J;
-        B -- Invoke: ShowResult --> L(Show overall result);
-    end
+    subgraph Quiz Workflow
+        A[User Request: Test me on S3] --> B(Quiz Bedrock Agent - Nova Pro 1.0);
+        B -- IF No Username --> C{Ask for Username};
+        C --> B;
+        B -- Invoke: CreateQuiz (topic, num_questions, username) --> D(Lambda: create_quiz);
+        D -- Read recommended_cert --> F[DynamoDB: user_profile];
+        D -- Invoke Bedrock: Nova Pro 1.0 (generate questions) --> G(Amazon Bedrock);
+        G --> D -- Store Quiz & Questions --> H[DynamoDB: quiz & question tables];
+        D -- Return: quiz_id, 1st Question --> B;
+        B -- Present Question 1 --> I(User Answer: A, B, C, D);
+        I --> J(Agent tracks answer);
+        J -- Invoke: ShowNextQuestion (quiz_id, order, user_answer) --> K(Lambda: show_next_question);
+        K -- Check Answer & Update Scores --> H;
+        K -- Get Next Question --> H;
+        K -- Return: Next Question OR quiz_complete=True --> B;
+        B -- Loop until Quiz Complete --> J;
+        B -- Invoke: ShowResult --> L(Show overall result);
+    end
 ```
 
 #### How components interact
@@ -44,7 +42,7 @@ The **Quiz Bedrock Agent** orchestrates the entire assessment using the **Nova P
 
 #### Data Flow
 
-The data flow is maintained through the **three DynamoDB tables**: `user_profile` (read-only for context), `quiz` (session metadata and total score), and `question` (per-question details and user performance). The agent's instructions ensure that the user's input is constantly tracked and updated in the respective tables.
+The data flow is maintained through the **three DynamoDB tables**: `user_profile` (read-only for context), `quiz` (session metadata and total score), and `question` (per-question details and user performance). The **Quiz Agent's** instructions ensure that the user's input is constantly tracked and updated in the respective tables.
 
 -----
 
@@ -81,6 +79,6 @@ The data flow is maintained through the **three DynamoDB tables**: `user_profile
 
   - **Logging (CloudWatch)**: Detailed logging is implemented via `print` statements in the Lambda functions, which are automatically sent to **CloudWatch Logs**. This captures critical events like **Nova Pro prompts/responses**, score updates, and error tracebacks.
   - **Monitoring (metrics, dashboard, alarms)**: **CloudWatch metrics** will monitor Lambda performance (duration, errors) and DynamoDB activity. **Alarms** should be set for high error rates (e.g., in the `create_quiz` Lambda) to quickly alert operations teams.
-  - **Error handling and retries**: The Lambdas use robust `try-except` logic (specifically for `ClientError` and `JSONDecodeError`) and the `create_error_response` helper function to return standardized error messages, allowing the agent to provide a polite, non-technical explanation to the user.
+  - **Error handling and retries**: The Lambdas use robust `try-except` logic (specifically for `ClientError` and `JSONDecodeError`) and the `create_error_response` helper function to return standardized error messages, allowing the **Quiz Agent** to provide a polite, non-technical explanation to the user.
   - **Backup?**: **DynamoDB Point-in-Time Recovery (PITR)** should be enabled for the `quiz` and `question` tables to ensure user progress data is not lost.
   - **Scaling and performance considerations?**: The serverless architecture scales automatically. The main performance consideration is the latency of the **Nova Pro 1.0** model call within `create_quiz`, which is mitigated by selecting a fast, high-end model. The interactive phase relies on fast, single-item lookups and updates in DynamoDB, ensuring quick response times.
