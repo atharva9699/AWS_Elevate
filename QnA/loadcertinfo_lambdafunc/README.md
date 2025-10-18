@@ -57,32 +57,24 @@ Key: CertificationName = recommended_cert
 
 On success:
 
+```json
 {
   "messageVersion": "1.0",
-  
   "response": {
-  
     "actionGroup": ...,
-    
     "apiPath": ...,
-    
     "httpMethod": "GET",
-    
     "httpStatusCode": 200,
-    
     "responseBody": {
-    
       "application/json": {
-
         "body": {
-        
           // full CertInfo record (dict)
-          
         }
       }
     }
   }
 }
+```
 
 The actionGroup, apiPath, and httpMethod values are taken dynamically from the incoming event.
 
