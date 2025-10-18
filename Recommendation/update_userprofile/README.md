@@ -37,11 +37,13 @@ It is designed to work with Bedrock Agents or API calls, allowing flexible updat
 The function supports two parameter formats:
 
 1. From event["parameters"] (Bedrock Agent format)
+```json
 "parameters": [
   {"name": "username", "value": "john_doe"},
   {"name": "currentjobrole", "value": "Cloud Engineer"},
   {"name": "interestareas", "value": "AI/ML"}
 ]
+```
 
 2. From event["requestBody"] (fallback, optional)
 
@@ -50,8 +52,8 @@ Used when the input comes via OpenAPI-style request.
 Required Field
 ## Example :
 
-|  **Field**                                             |  **Description**                                                                                                                                                                                                           |
-| ---------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+|  **Field**       |  **Description**     |
+| ---------------------- | -------- |
 | **username** |  Primary key of the user in DynamoDB | 
 
 If username is missing → returns 400 Bad Request.
