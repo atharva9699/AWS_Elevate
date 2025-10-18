@@ -12,7 +12,7 @@ The agent is designed to assist users in preparing for AWS certification exams b
 This approach ensures comprehensive syllabus coverage, user-driven flexibility, and effective exam preparation.
 
 ------------- 
-**Architecture Diagram:**
+**Architecture Diagram:** NEED TO ADD NEW DIAGRAM!!! minor change i the diagram
 
 <img width="819" height="486" alt="Screenshot 2025-10-14 at 18 44 12" src="https://github.com/user-attachments/assets/2ea26500-a433-4e0b-8470-7f63343391df" />
 
