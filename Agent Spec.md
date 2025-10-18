@@ -1,6 +1,31 @@
-# Goal 
 
-Define the specifications for all the agents
+## Architecture diagram
+
+<img width="1208" height="660" alt="Screenshot 2025-10-18 at 08 15 04" src="https://github.com/user-attachments/assets/6ebf1cdc-d450-4df9-baef-aa1d832735a1" />
+
+
+
+
+## Planner Agent 
+
+Planner agent takes username and assists the user by routing the request to desired agents like Recommendation, QnA, Tutor and Quiz.
+
+## Primary Responsibilities
+
+- Identify the user and set a consistent username
+- Understand what the user wants (intent detection)
+- Route the request to the correct specialist agent
+- Guide the user through the certification process (recommendation → learning → quiz → mastery)
+- User Identification & Username Handling
+- If the user has not provided their name, the system asks for it.
+
+Once the user shares their name, the system:
+- Converts it to concatenated lowercase with underscore
+  Example: “Bruce Wayne” → bruce_wayne
+- Treats this as their username for all future requests
+- Informs the user of their username ONLY on the first interaction
+
+On future interactions, the system uses the username silently.
 
 ---
 
@@ -8,7 +33,7 @@ Define the specifications for all the agents
 
 ### Purpose
 
-Based on the user's profile / history / aspirations recommend a specific AWS Certification.
+Based on the user's profile / history / aspirations recommend a relevant AWS Certification.
 
 ### Sample Requests
 
