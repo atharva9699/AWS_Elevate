@@ -8,7 +8,7 @@ The **Quiz Agent** is an expert system designed to **create and administer mock 
 
 ### 2\. Architecture Details
 
-#### Diagram (Mermaid Syntax)
+#### Diagram
 
 ```mermaid
 graph TD
