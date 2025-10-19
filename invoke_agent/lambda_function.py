@@ -32,13 +32,15 @@ def lambda_handler(event, context):
         }
     
     try:
-        print("INSIDE INVOKE AGENT LAMBDA FUNCTION3")
+        print("INSIDE INVOKE AGENT LAMBDA FUNCTION")
         print("Full event:", json.dumps(event, indent=2))
         
         # Parse request body
         body = json.loads(event.get('body', '{}'))
         user_message = body.get('message', '')
         session_id = body.get('sessionId', f'session-{context.aws_request_id}') 
+
+        username = "charles"
         
         if not user_message:
             return {
@@ -84,7 +86,7 @@ def lambda_handler(event, context):
                         agent_response += decoded_text
                         log_message(
                             messages_table,
-                            "charles",
+                            username,
                             "FINAL_RESPONSE",
                             f"{agent_response}"
                         )
@@ -106,27 +108,70 @@ def lambda_handler(event, context):
                 elif "trace" in event:
                     trace = event["trace"]
                     print("Trace event type:", list(trace.keys()))
-
+                    
                     # Handle nested trace structure (trace → trace → orchestrationTrace)
                     inner_trace = trace.get("trace", {})
                     
                     # Handle rationale events from orchestration trace
-                    if "orchestrationTrace" in trace:
-                        orchestration_trace = trace["orchestrationTrace"]
+                    if "orchestrationTrace" in inner_trace:
+                        orchestration_trace = inner_trace["orchestrationTrace"]
                         if "rationale" in orchestration_trace:
                             rationale = orchestration_trace["rationale"]
                             rationale_text = rationale.get("text", "")
-                            print(f"Rationale event detected")
+                            trace_id = rationale.get("traceId", "")
+                            
+                            print(f"Rationale event detected (TraceId: {trace_id})")
+                            print(f"Rationale text: {rationale_text}")
                             
                             # Log the rationale event
                             log_message(
                                 messages_table,
-                                "charles",
+                                username,
                                 "RATIONALE",
-                                rationale_text,
+                                "RATIONALE: (1) " + rationale_text,
                                 show_to_user=False,
                                 agent="Orchestration"
                             )
+                        
+                        # Handle agent collaborator invocations within orchestration trace
+                        if "invocationInput" in orchestration_trace:
+                            invocation_input = orchestration_trace["invocationInput"]
+                            if "agentCollaboratorInvocationInput" in invocation_input:
+                                agent_collab_input = invocation_input["agentCollaboratorInvocationInput"]
+                                agent_name = agent_collab_input.get("agentCollaboratorName", "Unknown")
+                                
+                                print(f"Agent collaborator invoked: {agent_name}")
+                                
+                                # Log the agent collaborator event
+                                log_message(
+                                    messages_table,
+                                    username,
+                                    "AGENT_COLLABORATOR",
+                                    f"AGENT_COLLABORATOR: {agent_name} Agent invoked",
+                                    show_to_user=False,
+                                    agent=agent_name
+                                )
+                    
+                    # Handle routing classifier trace for agent collaborator invocations
+                    elif "routingClassifierTrace" in inner_trace:
+                        routing_trace = inner_trace["routingClassifierTrace"]
+                        if "invocationInput" in routing_trace:
+                            invocation_input = routing_trace["invocationInput"]
+                            if "agentCollaboratorInvocationInput" in invocation_input:
+                                agent_collab_input = invocation_input["agentCollaboratorInvocationInput"]
+                                agent_name = agent_collab_input.get("agentCollaboratorName", "Unknown")
+                                
+                                print(f"Agent collaborator invoked: {agent_name}")
+                                
+                                # Log the agent collaborator event
+                                log_message(
+                                    messages_table,
+                                    username,
+                                    "AGENT_COLLABORATOR",
+                                    f"AGENT_COLLABORATOR: {agent_name} Agent invoked",
+                                    show_to_user=False,
+                                    agent=agent_name
+                                )
                     
         except Exception as stream_error:
             print(f"Error reading stream: {str(stream_error)}")
