@@ -43,7 +43,7 @@ Use of AWS Bedrock Agents.
 This project utilizes AWS Bedrock Agents to develop the learning assistant in a scalable, managed, and modular way.
 
  - Seamless Agent Development: Bedrock Agents offer a framework to define agent logic, integrate with AWS services (e.g., Lambda, DynamoDB), and manage conversation flows without    building complex orchestration manually.
- - Powered by Nova Pro Model: The agent uses the Nova Pro model for natural language understanding and reasoning, enabling:
+ - Powered by Nova Model: The agent uses the Nova model for natural language understanding and reasoning, enabling:
    - High-quality explanations
    - Exam-focused guidance
    - Context-aware responses
