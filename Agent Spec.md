@@ -46,9 +46,7 @@ The Planner Agent acts as the supervisor or controller of the system. It manages
 
 ### The Planner informs the user of their username only once during the first interaction.
 
-- Example:
-
-“Thanks, Bruce Wayne! Your username will be bruce_wayne from now on.”
+- Example: “Thanks, Bruce Wayne! Your username will be bruce_wayne from now on.”
 
 ### Intent Detection and Routing
 Based on user input, the Planner Agent identifies the intent and delegates the task to one of its collaborator agents:
