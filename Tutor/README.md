@@ -27,8 +27,8 @@ User: hi I'm John, I'm a data engineer, I have cleared CCP exam, I'm interest to
 
 
 
-- User asks through the chat interface to describe which topics are covered in the recommended cert?
-Then Planner agent analysis the reusers request and routes the request to the Tutor agent, and with the help of LLM the Tutor agent is able to reply to the user’s question.
+- User asks to describe which topics are covered in the recommended cert?
+Then Planner agent analysis the users request and reroutes the request to the Tutor agent, and with the help of LLM the Tutor agent is able to reply to the user’s question.
 
 
 
