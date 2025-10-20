@@ -21,11 +21,9 @@ Our application solves this by acting as your AWS cert prep coach – helping yo
 ---
 Below is our web application:
 
-https://main.d1pccdtn4duavu.amplifyapp.com/
-
-creds:
-'username: charles'
-'password: success'
+URL: [https://main.d1pccdtn4duavu.amplifyapp.com/](https://main.d1pccdtn4duavu.amplifyapp.com/) <br>
+Username: `charles` <br>
+Password: `success`
 
 
 ---
