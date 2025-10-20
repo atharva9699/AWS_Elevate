@@ -10,4 +10,4 @@ We are a Team of four. We all met in an Agentic AI course class. And our sir int
 
 **Dr. Bhavana Kanawade:** She is an Associate professor in International Institute of Information Technology College, Pune.
 
-**Auxilin Fernando:** She is an ex-Software Engineer, Pune.
+**Auxilin Fernando:** She is an ex-Software Engineer.
