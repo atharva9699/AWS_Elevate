@@ -12,9 +12,9 @@ The agent is designed to assist users in preparing for AWS certification exams b
 This approach ensures comprehensive syllabus coverage, user-driven flexibility, and effective exam preparation.
 
 ------------- 
-**Architecture Diagram:** NEED TO ADD NEW DIAGRAM!!! minor change i the diagram
+**Architecture Diagram:** 
 
-<img width="819" height="486" alt="Screenshot 2025-10-14 at 18 44 12" src="https://github.com/user-attachments/assets/2ea26500-a433-4e0b-8470-7f63343391df" />
+<img width="798" height="277" alt="Screenshot 2025-10-20 at 14 21 43" src="https://github.com/user-attachments/assets/0c3f765a-63c4-4f6e-8622-431f1392dd70" />
 
 ***User Interaction with Planner agent:***
 
@@ -25,8 +25,11 @@ User: hi I'm John, I'm a data engineer, I have cleared CCP exam, I'm interest to
 <img width="1164" height="439" alt="Screenshot 2025-10-14 at 17 29 46" src="https://github.com/user-attachments/assets/69d6c316-f1bb-4a7c-a12d-5c57156ee94a" />
 
 
-User asks the planner agent to describe which topics are covered in the recommended cert?
-So the Planner agent routes to Tutor agent, and with the help of LLM the Tutor agent is able to reply to the user’s question.
+
+- User asks through the chat interface to describe which topics are covered in the recommended cert?
+Then Planner agent analysis the reusers request and routes the request to the Tutor agent, and with the help of LLM the Tutor agent is able to reply to the user’s question.
+
+
 
 <img width="1164" height="486" alt="Screenshot 2025-10-14 at 17 32 20" src="https://github.com/user-attachments/assets/b47f2cca-7066-4e4b-8579-8f9c7520e141" />
 
