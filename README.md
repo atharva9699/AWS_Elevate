@@ -2,10 +2,10 @@
 
 ## Welcome to our Agentic AI application!
 
-**Your Personalized AWS Certification Coach – Powered by Amazon Bedrock Agents**
+### Your Personalized AWS Certification Coach – Powered by Amazon Bedrock Agents
 
 ---
-**Goal of this project**
+### Goal of this project
 
 As learners we struggle to identify which AWS certification aligns with our current skill level, professional background, and career aspirations. 
 With multiple certification paths available (Foundational, Associate, Professional, and Specialty), the decision-making process becomes overwhelming without proper guidance.
@@ -19,7 +19,7 @@ AWS certifications unlock new career opportunities, but many professionals face 
 Our application solves this by acting as your AWS cert prep coach – helping you choose a suitable cert, guiding your learning plans, and fueling your motivation until certification success.
 
 ---
-Below is our web application:
+### Below is our web application:
 
 URL: [https://main.d1pccdtn4duavu.amplifyapp.com/](https://main.d1pccdtn4duavu.amplifyapp.com/) <br>
 Username: `charles` <br>
