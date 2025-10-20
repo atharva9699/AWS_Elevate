@@ -14,7 +14,8 @@ This approach ensures comprehensive syllabus coverage, user-driven flexibility, 
 ------------- 
 **Architecture Diagram:** 
 
-<img width="798" height="277" alt="Screenshot 2025-10-20 at 14 21 43" src="https://github.com/user-attachments/assets/0c3f765a-63c4-4f6e-8622-431f1392dd70" />
+<img width="798" height="277" alt="Screenshot 2025-10-20 at 14 28 46" src="https://github.com/user-attachments/assets/ac77ab7f-ae7e-462d-9587-df3b060b9fb1" />
+
 
 ***User Interaction with Planner agent:***
 
