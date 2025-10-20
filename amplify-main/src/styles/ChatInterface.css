@@ -1,0 +1,219 @@
+/* Main container: Fills the screen and uses flexbox */
+/* Main container: Fills the screen and uses a cool gradient */
+.chat-container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  
+  /* --- BACKGROUND STYLE --- */
+  background-color: #f8f9fa; /* Fallback for older browsers */
+  background-image: linear-gradient(135deg, #e0c3fc 0%, #8ec5fc 100%);
+}
+
+.message-content {
+  white-space: pre-wrap; /* Preserves newlines and wraps text */
+  word-wrap: break-word; /* Breaks long words */
+  
+}
+
+.message-content.message-user {
+  text-align: left;
+}
+
+.message-content.message-bot {
+  text-align: left;
+}
+
+.message-content.message-error {
+  text-align: left;
+}
+
+/* FINAL_RESPONSE styling */
+.message.final-response {
+  border-left: 4px solid #0066cc;
+  margin: 12px 0;
+}
+
+.message-content.final-response-content {
+  background-color: #e6f2ff;
+  border-radius: 8px;
+  padding: 16px;
+  font-weight: 500;
+  color: #0051a8;
+}
+
+.chat-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: sticky;
+  top: 0;
+  padding: 10px 20px;
+  z-index: 10;
+
+  /* --- Frosted Glass Effect --- */
+  background-color: rgba(255, 255, 255, 0.7); /* White with 70% opacity */
+  backdrop-filter: blur(8px);                 /* Blurs the background behind it */
+  -webkit-backdrop-filter: blur(8px);         /* For Safari browser support */
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2); /* Faint bottom border */
+}
+
+.chat-header h2 {
+  margin: 0;
+  color: #212529;
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
+/* Message Area: Grows to fill available space and becomes scrollable */
+/* Message Area: Grows to fill available space and becomes scrollable */
+.chat-messages {
+  flex-grow: 1; 
+  overflow-y: auto;
+  padding: 20px;
+  
+  /* Add these two lines to center the welcome message */
+  display: flex;
+  flex-direction: column;
+}
+
+/* Welcome Screen Styling */
+.welcome-state {
+  text-align: center;
+  /* This now centers the welcome block vertically within the flex container */
+  margin: auto; 
+  padding: 40px 20px;
+}
+.welcome-state h1 {
+  font-weight: 500;
+  margin-bottom: 8px;
+}
+
+.empty-state {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  color: #6c757d;
+}
+.message {
+  display: flex;
+  margin-bottom: 15px;
+}
+
+.message.user {
+  justify-content: flex-end;
+}
+
+.message.bot, .message.error {
+  justify-content: flex-start;
+}
+
+.message-content {
+  padding: 10px 15px;
+  border-radius: 18px;
+  max-width: 75%;
+}
+
+.message-user {
+  background-color: #007bff;
+  color: white;
+}
+
+.message-bot {
+  background-color: #f1f1f1;
+  color: #333;
+  border: 1px solid #e0e0e0;
+}
+
+.message-error {
+  background-color: #f8d7da;
+  color: #721c24;
+  border: 1px solid #f5c6cb;
+}
+
+/* Input Form Container: Frosted glass effect to match the header */
+.chat-input-form {
+  background-image: linear-gradient(135deg, #e0c3fc 0%, #8ec5fc 100%);
+  padding: 10px 20px 20px 20px;
+  flex-shrink: 0;
+}
+
+/* Style for when the user is typing in the input field */
+.chat-input-form .form-control:focus {
+  background-color: rgba(255, 255, 255, 1);
+  /* Use the blue from the gradient for the glow effect */
+  border-color: #8ec5fc; 
+  box-shadow: 0 0 0 3px rgba(142, 197, 252, 0.4); /* Lighter blue glow */
+}
+
+/* --- UPDATED STYLES for the Send button --- */
+.chat-input-form .btn-primary {
+  /* Use the blue from the background gradient */
+  background-color: #8ec5fc;
+  
+  border-radius: 8px;
+  border: none;
+  color: white; /* Make the text white for better contrast */
+  font-weight: 600;
+  padding: 0 20px;
+  transition: background-color 0.2s ease;
+}
+
+
+
+/* Add a hover effect for better user feedback */
+.chat-input-form .btn-primary:hover {
+  background-color: #000000; /* A slightly darker shade of the blue */
+}
+
+/* Style for a disabled button */
+.chat-input-form .btn-primary:disabled {
+  background-color: #34a81a;
+  cursor: not-allowed;
+}
+
+/* Suggestion Buttons: Also full width */
+.suggestion-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  padding: 0 20px 20px 20px;
+  flex-wrap: wrap;
+}
+
+.suggestion-btn {
+  background-color: #f0f0f0;
+  border: 1px solid #ddd;
+  border-radius: 16px;
+  padding: 8px 16px;
+  font-size: 0.9em;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.suggestion-btn:hover {
+  background-color: #e0e0e0;
+}
+
+/* Styling for each suggestion button */
+.suggestion-btn {
+  /* Use the blue from the gradient for the border and text */
+  background-color: rgba(143, 220, 203, 0.7); /* Match the frosted glass inputs */
+  border: 1px solid #8ec5fc;
+
+  border-radius: 16px;
+  padding: 8px 16px;
+  font-size: 0.9em;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out; /* Animate all properties */
+}
+
+/* On hover, fill the button with color */
+.suggestion-btn:hover {
+  background-color: #8ec5fc; /* Fill with the blue color */
+  color: #ffffff;             /* Make the text white */
+  transform: translateY(-2px); /* Add a slight lift effect */
+  box-shadow: 0 4px 12px rgba(142, 197, 252, 0.4); /* Add a soft glow */
+}
