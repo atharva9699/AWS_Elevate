@@ -1,29 +1,32 @@
-# 🚀 **AWS Elevate**
+### AWS Elevate
 
-**Your Personalized AWS Certification Prep Coach – Powered by Autonomous Agentic AI**
+## Welcome to our Agentic AI application!
+
+**Your Personalized AWS Certification Coach – Powered by Amazon Bedrock Agents**
 
 ---
+**Goal of this project**
 
-## 🌟 **Overview**
+As learners we struggle to identify which AWS certification aligns with our current skill level, professional background, and career aspirations. 
+With multiple certification paths available (Foundational, Associate, Professional, and Specialty), the decision-making process becomes overwhelming without proper guidance.
+
+Our projects main aim is to help students and aspiring cloud professionals to select an aws certification aligned to their current job, which area of aws they are interested to explore and their desired job role.
+
 
 AWS certifications unlock new career opportunities, but many professionals face three persistent hurdles:
+ 
 
-1️⃣ **Choosing the Right Certification** aligned with their role and career goals.  
-2️⃣ **Avoiding Wasted Time** on topics they already know.  
-3️⃣ **Staying Motivated** with progress tracking and real-time feedback.  
-
-👉 **AWS_Elevate** solves this by acting as your autonomous prep coach – guiding your path, adapting learning plans, and fueling your motivation until certification success.
+Our application solves this by acting as your AWS cert prep coach – helping you choose a suitable cert, guiding your learning plans, and fueling your motivation until certification success.
 
 ---
+Below is our web application:
 
-## 💡 **Why Choose AWS_Elevate?**
+https://main.d1pccdtn4duavu.amplifyapp.com/
 
-✨ Because it’s more than just prep – it’s your **career accelerator**.
+creds:
+'username: charles'
+'password: success'
 
-- 🧭 **Smart PathFinder** → Matches certifications to your skills & goals.  
-- ⚡ **Adaptive Prep** → Skips the fluff, focuses only on your gaps.  
-- 🔥 **Motivation Engine** → Real-time feedback, streaks & progress milestones.  
-- 📊 **Personalized Dashboard** → See exactly where you stand in your journey.  
 
 ---
 
