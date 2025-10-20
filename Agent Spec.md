@@ -1,7 +1,8 @@
 
 ## Architecture diagram
 
-<img width="1208" height="660" alt="Screenshot 2025-10-18 at 08 15 04" src="https://github.com/user-attachments/assets/6ebf1cdc-d450-4df9-baef-aa1d832735a1" />
+<img width="831" height="587" alt="Screenshot 2025-10-20 at 15 10 51" src="https://github.com/user-attachments/assets/1a5a4cb7-0454-430e-968a-cde485b6668b" />
+
 
 
 
