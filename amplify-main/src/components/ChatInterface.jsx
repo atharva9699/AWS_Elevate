@@ -5,7 +5,6 @@ import API_CONFIG from '../config';
 import '../styles/ChatInterface.css';
 import axios from 'axios';
 
-// Check for browser's Speech Recognition API
 const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
 
 const ChatInterface = () => {
@@ -13,13 +12,12 @@ const ChatInterface = () => {
   const [inputValue, setInputValue] = useState('');
   const [loading, setLoading] = useState(false);
   const [sessionId, setSessionId] = useState('');
+  const [showDetails, setShowDetails] = useState(false); // 🔹 New state
   const messagesEndRef = useRef(null);
 
-  // --- State for voice input ---
   const [isListening, setIsListening] = useState(false);
   const recognitionRef = useRef(null);
 
-  // --- State for polling ---
   const [isPolling, setIsPolling] = useState(false);
   const [lastCreatedAt, setLastCreatedAt] = useState(null);
   const [receivedFinalResponse, setReceivedFinalResponse] = useState(false);
@@ -27,12 +25,13 @@ const ChatInterface = () => {
 
   const suggestions = [
     "My username is Charles, tell me about my recommended cert.",
-    "What is the price of AWS Cloud Practitioner?",
-    "Test my knowledge on my cert.",
-    "I want study material on CCP."
+    "I want to become a hands-on GenAI engineer, which cert should I pursue?",
+    "Teach me the basics of S3 for beginners.",
+    "My username is Ansley, quiz me on IAM policies with 2 questions."
+    
   ];
 
-  // Setup Speech Recognition on component mount
+  // --- Speech Recognition setup ---
   useEffect(() => {
     if (!SpeechRecognition) {
       console.log("Speech recognition not supported in this browser.");
@@ -46,8 +45,7 @@ const ChatInterface = () => {
 
     recognition.onresult = (event) => {
       const transcript = Array.from(event.results)
-        .map(result => result[0])
-        .map(result => result.transcript)
+        .map(result => result[0].transcript)
         .join('');
       setInputValue(transcript);
     };
@@ -56,9 +54,7 @@ const ChatInterface = () => {
       console.error("Speech recognition error:", event.error);
     };
 
-    recognition.onend = () => {
-      setIsListening(false);
-    };
+    recognition.onend = () => setIsListening(false);
 
     recognitionRef.current = recognition;
   }, []);
@@ -71,62 +67,45 @@ const ChatInterface = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
   }, [messages]);
 
-  // Polling function to fetch messages
+  // --- Polling logic ---
   const pollMessages = async () => {
     try {
       const params = new URLSearchParams({
-        //add sessionId if needed
         session_id: sessionId,
         limit: '20'
       });
 
-      console.log('Polling messages with lastCreatedAt:', lastCreatedAt);
-      if (lastCreatedAt) {
-        params.append('since_created_at', lastCreatedAt);
-      }
+      if (lastCreatedAt) params.append('since_created_at', lastCreatedAt);
 
-      const response = await axios.get(
-        `${API_CONFIG.API_URL}/messages?${params.toString()}`,
-        {
-          headers: {
-            'x-api-key': API_CONFIG.API_KEY
-          }
-        }
-      );
+      const response = await axios.get(`${API_CONFIG.API_URL}/messages?${params.toString()}`, {
+        headers: { 'x-api-key': API_CONFIG.API_KEY }
+      });
 
       const newMessages = response.data.messages || [];
 
       if (newMessages.length > 0) {
         let hasFinalResponse = false;
 
-        // Add bot messages to the chat
         newMessages.forEach((msg) => {
-          // Strip away <sources> tag and everything after it
-          const cleanedMessageContent = msg.message_content.split('<sources>')[0].trim();
+          const cleanedMessageContent = msg.message_content.split('<sources>')[0].replace(/\n{2,}/g, '\n').trim();
 
           const botMessage = {
             id: uuidv4(),
             text: cleanedMessageContent,
             sender: 'bot',
             messageType: msg.message_type,
-            timestamp: msg.created_at
+            timestamp: msg.created_at,
+            showToUser: msg.show_to_user // 🔹 Capture show_to_user flag
           };
           setMessages((prev) => [...prev, botMessage]);
 
-          // Check if this message is a FINAL_RESPONSE
-          if (msg.message_type === 'FINAL_RESPONSE') {
-            hasFinalResponse = true;
-          }
+          if (msg.message_type === 'FINAL_RESPONSE') hasFinalResponse = true;
         });
 
-        // Update lastCreatedAt to the latest message's timestamp
         const latestTimestamp = newMessages[0].created_at;
-        console.log('Updating lastCreatedAt to:', latestTimestamp);
         setLastCreatedAt(latestTimestamp);
 
-        // If we received a FINAL_RESPONSE, stop polling
         if (hasFinalResponse) {
-          console.log('FINAL_RESPONSE received, stopping polling');
           setReceivedFinalResponse(true);
           stopPolling();
         }
@@ -136,20 +115,14 @@ const ChatInterface = () => {
     }
   };
 
-  // Start polling after chat message is sent
   const startPolling = () => {
-    if (pollingIntervalRef.current) {
-      clearInterval(pollingIntervalRef.current);
-    }
+    if (pollingIntervalRef.current) clearInterval(pollingIntervalRef.current);
 
     setIsPolling(true);
     setReceivedFinalResponse(false);
-    pollingIntervalRef.current = setInterval(() => {
-      pollMessages();
-    }, 7000); // Poll every 7 seconds
+    pollingIntervalRef.current = setInterval(pollMessages, 3000);
   };
 
-  // Stop polling
   const stopPolling = () => {
     if (pollingIntervalRef.current) {
       clearInterval(pollingIntervalRef.current);
@@ -158,12 +131,7 @@ const ChatInterface = () => {
     setIsPolling(false);
   };
 
-  // Cleanup polling on component unmount
-  useEffect(() => {
-    return () => {
-      stopPolling();
-    };
-  }, []);
+  useEffect(() => stopPolling, []);
 
   const sendMessage = async (e, messageText) => {
     if (e) e.preventDefault();
@@ -182,7 +150,6 @@ const ChatInterface = () => {
     setLoading(true);
 
     try {
-      // Fire and forget - don't wait for response
       axios.post(
         API_CONFIG.API_URL + "/chat",
         { message: messageToSend, sessionId: sessionId },
@@ -203,11 +170,8 @@ const ChatInterface = () => {
         setMessages((prev) => [...prev, errorMessage]);
       });
 
-      // Reset final response flag and start polling
       setReceivedFinalResponse(false);
-      if (!pollingIntervalRef.current) {
-        startPolling();
-      }
+      if (!pollingIntervalRef.current) startPolling();
     } finally {
       setLoading(false);
     }
@@ -215,12 +179,8 @@ const ChatInterface = () => {
 
   const handleVoiceInput = () => {
     if (!recognitionRef.current) return;
-
-    if (isListening) {
-      recognitionRef.current.stop();
-    } else {
-      recognitionRef.current.start();
-    }
+    if (isListening) recognitionRef.current.stop();
+    else recognitionRef.current.start();
     setIsListening(!isListening);
   };
 
@@ -231,34 +191,58 @@ const ChatInterface = () => {
   const clearChat = () => {
     stopPolling();
     setMessages([]);
-    // Add a 4 digit random number to sessionId for uniqueness
     setSessionId(`session-${Date.now()}-${Math.floor(1000 + Math.random() * 9000)}`);
     setLastCreatedAt(null);
     setReceivedFinalResponse(false);
   };
 
+  // 🔹 Filter messages based on showDetails toggle
+  const visibleMessages = messages.filter(
+    (msg) => showDetails || msg.showToUser !== false
+  );
+
   return (
     <div className="chat-container">
       <div className="chat-header">
         <h2>AWS Elevate (v1.3)</h2>
-        <div>
+        <div className="header-buttons">
           {isPolling && <span className="polling-indicator">⏱ Polling...</span>}
           <button className="btn btn-sm btn-outline-secondary" onClick={clearChat}>
             Clear Chat
           </button>
+          {/* 🔹 New toggle */}
+          <label style={{ marginLeft: '10px' }}>
+            <input
+              type="checkbox"
+              checked={showDetails}
+              onChange={() => setShowDetails(!showDetails)}
+            />{' '}
+            Show Details
+          </label>
         </div>
       </div>
 
       <div className="chat-messages">
-        {messages.length === 0 ? (
+        {visibleMessages.length === 0 ? (
           <div className="welcome-state">
             <h1>Welcome to AWS Certification Coach!</h1>
             <p className="text-muted">What's your name and how can I help you?</p>
           </div>
         ) : (
-          messages.map((message) => (
-            <div key={message.id} className={`message ${message.sender} ${message.messageType === 'FINAL_RESPONSE' ? 'final-response' : ''}`}>
-              <div className={`message-content message-${message.sender} ${message.messageType === 'FINAL_RESPONSE' ? 'final-response-content' : ''}`}>
+          visibleMessages.map((message) => (
+            <div
+              key={message.id}
+              className={`message ${message.sender} ${
+                message.messageType === 'FINAL_RESPONSE' ? 'final-response' : ''
+              }`}
+            >
+              <div
+                className={`message-content message-${message.sender} ${
+                  message.messageType === 'FINAL_RESPONSE'
+                    ? 'final-response-content'
+                    : ''
+                }`}
+              >
                 <ReactMarkdown>{message.text}</ReactMarkdown>
               </div>
             </div>
