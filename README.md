@@ -1,8 +1,14 @@
-### AWS Elevate
+### AWS Elevate: Your Personalized AWS Certification Coach – Powered by Amazon Bedrock Agents
+---
+**Our project demo video:** https://youtu.be/Z6x_PlLKjDo
 
-## Welcome to our Agentic AI application!
+### Below is our web application:
 
-### Your Personalized AWS Certification Coach – Powered by Amazon Bedrock Agents
+URL: [https://main.d1pccdtn4duavu.amplifyapp.com/](https://main.d1pccdtn4duavu.amplifyapp.com/) <br>
+Username: `charles` <br>
+Password: `success`
+
+
 
 ---
 ### Goal of this project
@@ -19,12 +25,6 @@ AWS certifications unlock new career opportunities, but many professionals face 
 Our application solves this by acting as your AWS cert prep coach – helping you choose a suitable cert, guiding your learning plans, and fueling your motivation until certification success.
 
 ---
-### Below is our web application:
-
-URL: [https://main.d1pccdtn4duavu.amplifyapp.com/](https://main.d1pccdtn4duavu.amplifyapp.com/) <br>
-Username: `charles` <br>
-Password: `success`
 
 
----
 
